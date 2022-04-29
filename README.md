@@ -1,311 +1,473 @@
-<h1 align="center"><a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic Theme</a></h1>
+<p align="center"><a href="https://shen-yu.gitee.io" target="_blank" rel="noopener noreferrer"><img width="100" src="logo.png" alt="ayer logo"></a></p>
+
+<h3 align="center">一个干净且优雅的 Hexo 主题</h3>
 
 <p align="center">
-<img src="https://i.loli.net/2019/06/12/5d006bd289aa325037.png" alt="Chic theme">
+  <a href="https://travis-ci.org/Shen-Yu/hexo-theme-ayer?branch=master" target="_blank" rel="noopener noreferrer">
+    <img alt="travis-ci" src="https://travis-ci.org/Shen-Yu/hexo-theme-ayer.svg?branch=master">
+  </a>
+  <a href="http://standardjs.com" target="_blank" rel="noopener noreferrer">
+    <img alt="js-standard-style" src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg">
+  </a>
+  <br>  
+  <a href="https://www.npmjs.com/package/hexo-theme-ayer" target="_blank" rel="noopener noreferrer">
+  <img alt="npm" src="https://img.shields.io/npm/dt/hexo-theme-ayer">
+  </a>
+  <a href="https://shen-yu.gitee.io" target="_blank" rel="noopener noreferrer">
+   <img alt="platform" src="https://img.shields.io/badge/platform-PC--ios--android-ff69b4.svg">
+   </a>
+  <a href="https://gitter.im/hexo-theme-ayer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank" rel="noopener noreferrer">
+    <img alt="Gitter" src="https://badges.gitter.im/Join%20Chat.svg">
+  </a>
+  <br>
+  <a href="https://www.npmjs.com/package/hexo-theme-ayer" target="_blank" rel="noopener noreferrer">
+    <img alt="npm version" src="https://img.shields.io/npm/v/hexo-theme-ayer">
+  </a> 
+ <img alt="language" src="https://img.shields.io/badge/language-ejs--stylus-green.svg">
+ <a href="https://github.com/Shen-Yu/hexo-theme-ayer/releases" target="_blank" rel="noopener noreferrer">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Shen-Yu/hexo-theme-ayer?color=b37feb">
+  </a>
+  <a href="https://github.com/Shen-Yu/hexo-theme-ayer/blob/master/LICENSE" target="_blank" rel="noopener noreferrer"><img alt="LICENSE" src="https://img.shields.io/badge/LICENSE-SATA-6ccab8">
+  </a>
 </p>
 
-> Chic, French word meaning 'Elegant' in English.
+---
 
-<p align="center">
-<img alt="Author" src="https://img.shields.io/badge/Author-Sirice-lightgray.svg"/>
-<img alt="Node" src="https://img.shields.io/badge/Node-6.0%2B-43853d.svg"/>
-<img alt="Hexo" src="https://img.shields.io/badge/Hexo-3.0+-0e83cd.svg"/>
-<img alt="Device" src="https://img.shields.io/badge/Device-responsive-orange.svg"/>
-<img alt="Build Status" src="https://img.shields.io/badge/build-passing-brightgreen"/>
-</p>
+:ocean: Ayer is a clean and elegant theme for Hexo, also fast, powerful and responsive. It contains many awesome features, It's perfect for your blog, "Ayer" means "water" in Malaysian and "yesterday" in Spanish. [Create an issue](https://github.com/shen-yu/hexo-theme-ayer/issues/new/choose) if you have any queries or advice during the process of using, 
 
-## Documentation language
+<b>注：收藏本主题请点右上角 Star，谢谢~~ </b>
+<b>如果你想给主题添砖加瓦，可以点右上角 Fork，然后给此仓库提交 PR</b>
 
-- [中文文档](README-CN.md)
-- [English](README.md)
+### [Preview 预览](https://shen-yu.gitee.io)
 
-## Contents
-- [Documentation language](#documentation-language)
-- [Contents](#contents)
-- [Introduction](#introduction)
-- [Demo](#demo)
-- [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-  - [Add 'Tag', 'Category' Page](#add-tagcategory-page)
-  - [MathJax (Render LaTeX Formula)](#mathjax-render-latex-formula)
-  - [Image-title](#image-title)
-- [Customize](#customize)
-- [FAQ](#faq)
-- [Gallary](#gallary)
-- [LICENSE](#license)
+### [中文说明](https://shen-yu.gitee.io/2019/ayer/)
 
+### [国内镜像](https://gitee.com/shen-yu/hexo-theme-ayer)
 
-## Introduction
-An elegant, powerful, easy-to-read Hexo theme.
+![Screenshot](screenshots/hexo-theme-ayer.png)
 
-## Demo
-- [Demo site](https://siricee.github.io/hexo-theme-Chic)
-- <del>[Author's blog](https://siricee.github.io/)</del> (*Not using Hexo currently*)
+## Install
 
-## Features
-- Appropriate blank blocks, elegant but not simple.
+### For hexo >= 5.0
 
-- Light/Dark theme, just one click.
+```shell
+npm i hexo-theme-ayer -S
+```
 
-- Abundant highlight mode.
+- If this theme is newly installed, a `_config.ayer.yml` file will be generated in the root directory after the installation is complete, and you can directly edit the `_config.ayer.yml` file for configuration.
+- If it is a theme upgrade, you can use the configuration method of hexo < 5.0, or you can move the original configuration file to the root directory and rename it to `_config.ayer.yml`.
 
-- Elaborately selected fonts, best reading experience. *'Microsoft Jhenghei' especially recommended.*
+### For hexo < 5.0
 
-- Auto fit Mobile and Screen responsively.
+```shell
+git clone https://github.com/Shen-Yu/hexo-theme-ayer.git themes/ayer
+```
 
-- Support MathJax, support formula written in LaTeX.
+## Enable
 
-## Installation
+Modify `theme` setting in `_config.yml` to `ayer`
+
+```yml
+theme: ayer
+```
+
+## Update
 
 ```bash
-cd your-blog/themes
-git clone https://github.com/Siricee/hexo-theme-Chic.git Chic
-# Modify theme setting in _config.yml to Chic.
+cd themes/ayer
+git pull
 ```
+
+## Multi Language Support
+
+zh-CN（中文简体） en（English） zh-TW（中文繁体） ja（日本語） es（Español） de（Deutsch） fr（Français） ru（Русский） ko（한국어） vi（Tiếng Việt） nl（Nederlands） no（norsk） pt（Português）
+
+English is default languge, if you want to change, modify `language` option in `_config.yml` file in your Hexo blog's root folder.
 
 ## Configuration
-<details>
-<summary><mark>Click here to spread</mark></summary>
 
-```yaml
-# Header
-navname: Bentham's Blog
+let me know if you have any questions.
 
-# navigatior items
-nav:
-  Posts: /archives
-  Categories: /category
-  Tags: /tag
-  About: /about
+```yml
+# Menu-Sidebar
+menu:
+  Home: /
+  Archives: /archives
+  Categories: /categories
+  Tags: /tags
+  Gallery: http://shenyu-vip.lofter.com
+  Travel: /tags/旅行/
+  About: /2019/about
 
-# favicon
+# Subtitle and Typing animation
+# https://github.com/mattboldt/typed.js
+subtitle:
+  enable: true
+  text: A clean and elegant theme
+  text2: It's perfect for your hexo blog
+  text3: Have fun! #Supports up to three lines of text
+  startDelay: 0
+  typeSpeed: 200
+  loop: true
+  backSpeed: 100
+  showCursor: true
+
+# Favicon and sidebar logo
 favicon: /favicon.ico
+logo: /images/ayer-side.svg
 
-# Profile
-nickname: Jeremy Bentham
-
-### this variable is MarkDown form.
-description: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** <br>Fusce eget urna vitae velit *eleifend interdum at ac* nisi.
-avatar: /image/avatar.jpeg
-
-# main menu navigation
-## links key words should not be changed.
-## Complete url after key words.
-## Unused key can be commented out.
-links:
-  Blog: /archives
-#  Category:
-#  Tags:
-#  Link:
-#  Resume:
-#  Publish:
-#  Trophy:
-#  Gallary:
-#  RSS:
-#  AliPay:
-  ZhiHu: https://www.zhihu.com/people/sirice
-#  LinkedIn:
-#  FaceBook:
-#  Twitter:
-#  Skype:
-#  CodeSandBox:
-#  CodePen:
-#  Sketch:
-#  Gitlab:
-#  Dribble:
-  Instagram:
-  Reddit:
-#  YouTube:
-#  QQ:
-#  Weibo:
-#  WeChat:
-  Github: https://github.com/Siricee
-
-# how links show: you have 2 choice--text or icon.
-links_text_enable: false
-links_icon_enable: true
-
-# Post page
-## Post_meta
-post_meta_enable: true
-
-post_author_enable: true
-post_date_enable: true
-post_category_enable: true
-## Post copyright
-post_copyright_enable: true
-
-post_copyright_author_enable: true
-post_copyright_permalink_enable: true
-post_copyright_license_enable: true
-post_copyright_license_text: Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-post_copyright_slogan_enable: true
-post_copyright_slogan_text: Do you believe in <strong>DESTINY<strong>?
-## toc
-post_toc_enable: true
-
-# Page
-page_title_enable: true
-
-# Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
-date_format: MMMM D, YYYY
-time_format: H:mm:ss
-
-# stylesheets loaded in the <head>
-stylesheets:
-  - /css/style.css
-
-# scripts loaded in the end of the body
-scripts:
-  - /js/script.js
-  - /js/tocbot.min.js
-    # tscanlin/tocbot: Build a table of contents from headings in an HTML document.
-    # https://github.com/tscanlin/tocbot
-
-
-# plugin functions
-## Mathjax: Math Formula Support
-## https://www.mathjax.org
-mathjax:
+# Cover Setting
+# enable: [true|false]；path: [background-image]；logo: [cover-logo-image]
+cover:
   enable: true
-  import: demand # global or demand
-  ## global: all pages will load mathjax,this will degrade performance and some grammers may be parsed wrong.
-  ## demand: Recommend option,if your post need fomula, you can declare 'mathjax: true' in Front-matter
-```
-</details>
-<br>
+  path: /images/cover1.jpg # there are some beautiful cover images in Ayer's directory: /source/images, choose your favorite image to replace it.
+  logo: /images/ayer.svg
 
-### Add 'Tag', 'Category' Page
+# ProgressBar
+progressBar: true
 
-There is no 'tag' or 'category' page in the site as it initializes. If you need it, please follow the steps below.
-
-1. execute commands
-```bash
-hexo new page tag
-hexo new page category
-```
-2. enter the dictionary
-```bash
-cd source/tag
-```
-3. add 'layout' key
-```yaml
-// source\tag\index.md
----
-title: Tag
-layout: tag
----
-```
-4. Do so with the category page with `Category` as title and `category` as layout.
-
-### MathJax (Render LaTeX formula)
-
-Related config file (`Chic/_config.yml`):
-```yaml
-# plugin functions
-## Mathjax: Math Formula Support
-## https://www.mathjax.org
-mathjax:
+# Boardcast
+broadcast:
   enable: true
-  import: global # global or demand
-  ## global: all pages will load mathjax,this will degrade performance and some grammers may be parsed wrong.
-  ## demand: if your post need fomula, you can declare 'mathjax: true' in Front-matter
+  type: 2 # 1：custom，2：hitokoto api(https://hitokoto.cn/)
+  text: a clean and elegant theme, fast and responsive. # only work in custom mode
+
+# Article Setting
+# (Use this to excerpt if article is too long：<!--more-->)
+excerpt_link: Read More...
+excerpt_all: false
+
+# Copy code button
+copy_btn: true
+# Share
+share_enable: true
+# If you are not in China, maybe you prefer to set:false
+share_china: true
+# share text
+share_text: Share
+# search text
+search_text: Search
+# nav text
+nav_text:
+  page_prev: Prev page
+  page_next: Next page
+  post_prev: Newer posts
+  post_next: Older posts
+
+# Catalog in article
+toc: true
+
+# images in the article support click to fullscreen
+image_viewer: true
+
+# https://github.com/willin/hexo-wordcount
+word_count:
+  enable: true
+  # only display in article page(not in index page)
+  only_article_visit: true
+
+# Reward Setting
+# type：0-close reward； 1-only open in article which you have configured reward:true； 2-open in all articles
+reward_type: 2
+# reward word
+reward_wording: "Buy me a cup of coffee~"
+# qrcode image path
+alipay: /images/alipay.jpg
+# qrcode image path
+weixin: /images/wechat.jpg
+
+# Copyright
+# type：0-close all； 1-only display in article which you have configured copyright: true； 2-all articles
+copyright_type: 2
+
+# Search
+# https://github.com/theme-next/hexo-generator-searchdb
+search: true
+
+# RSS
+# leave it empty if you dont' need
+rss: /atom.xml
+
+# DarkMode
+darkmode: true
+
+# Canvas background style: 0-close，1-moveline
+canvas_bg: 0
+
+# Custom mouse pointer，replace /images/mouse.cur
+mouse:
+  enable: false
+  path: /images/mouse.cur
+
+# Click effect: 0-close，1-love，2-boom，3-particles
+click_effect: 0
+
+# articleWidth and sidebarWidth
+layout:
+  article_width: 80rem
+  sidebar_width: 8rem
+
+# GitHub Ribbons(https://github.blog/2008-12-19-github-ribbons/)
+github:
+  # (Set false if you don't need)
+  enable: false
+  url: https://github.com/Shen-Yu/hexo-theme-ayer
+
+# pv&uv statistics
+busuanzi:
+  enable: true
+
+# cnzz statistics
+cnzz:
+  enable: true
+  url: #
+
+# Google Analytics
+google_analytics: ""
+# Baidu Analytics
+baidu_analytics: ""
+
+# Mathjax Support
+mathjax: true
+
+# Katex Support
+# note: need change the hexo-renderer，npm un hexo-renderer-marked -S && npm i hexo-renderer-markdown-it-katex -S
+katex:
+  enable: false # true
+  allpost: true
+  copy_tex: false
+
+# since year
+since: 2019
+
+# only for chinese website
+# ICP
+icp:
+  enable: false
+  url: "http://www.beian.miit.gov.cn/"
+  text: "浙ICP备88888888"
+# gongan
+gongan:
+  enable: false
+  img: /images/beian.png
+  url: "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123" #link
+  text: "浙公网安备01234567890123号"
+
+# friends link
+friends_link:
+  Ayer: #site name
+    # site url
+    url: https://github.com/Shen-Yu/hexo-theme-ayer
+    # site icon(optional)
+    img: /images/ayer.png
+  GitHub:
+    url: https://github.com/Shen-Yu
+    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png
+  gitee:
+    url: https://gitee.com/shen-yu
+    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png
+  Hexo:
+    url: https://hexo.io
+    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png
+  hexo-tag-chart:
+    url: https://github.com/Shen-Yu/hexo-tag-chart
+    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png
+
+# Comment：1、Valine (recommended)；2、Gitalk；3、Twikoo；4、MiniValine
+# You can close the comment section on one of your posts by marking `comments: false` in front-matter.
+
+# 1、Valine [A fast, simple & powerful comment system](https://github.com/xCss/Valine)
+# You need create leancloud account first (https://console.leancloud.app), then put the id|key in below.
+leancloud:
+  enable: true
+  app_id: #
+  app_key: #
+# Valine Setting
+valine:
+  enable: true
+  avatar: mp # (https://valine.js.org/avatar.html)
+  placeholder: Add some comments to my article~ # placeholder
+
+# 2、Gitalk(https://github.com/gitalk/gitalk)
+gitalk:
+  enable: false # true
+  clientID: # GitHub Application Client ID
+  clientSecret: # Client Secret
+  repo: # Repository name
+  owner: # GitHub ID
+  admin: # GitHub ID
+
+# 3、Twikoo(https://github.com/imaegoo/twikoo)
+twikoo:
+  enable: false
+  envId: #
+
+# 4、MiniValine
+# See: https://github.com/MiniValine/MiniValine
+minivaline:
+  enable: false
+  serverURL: https://minivaline.your-domain.com
+
+# advertisement
+# if there is an "ad" word in photo or url，it may blocked by adblock or any other browser extensions
+ads:
+  ad_1:
+    title: vultr优惠vps
+    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png
+    url: https://www.vultr.com/?ref=8630075
+    width: 300
+  ad_2:
+    title: 云服务器全球购低至2折
+    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ten_2.jpg
+    url: https://curl.qcloud.com/kvO7hb43
+    width: 300
+
+# encrypt settings
+lock:
+  enable: false
+  password: 123456
 ```
-`mathjax` uses the keywords below:
-- `enable`: value `true` enables mathjax (default value `true`); value `false` disables it.
-- `import`: this key sets mathjax load method, options can be `global` or `demand`.
-  - `global`: global import, all pages will load script. It's convenient, but **it may cause some MarkDown grammars to be parsed wrong**. For example, consecutive `$$` will be rendered as a formula; Besides, global import will waste performance in pages without any formula.
-  - `demand`: [Recommended] Import mathjax when you need it. After you set this value, if you need to use formula, just declare it in the post Front-matter. Here is an example:
-    ```yaml
-    ---
-    title: MathJax Test
-    date: 2019-07-05 21:27:59
-    tags:
-    mathjax: true # add this statement, MathJax will be enabled in this post.
-    ---
-    ```
-LaTeX grammars will not be illustrated in this doc. In Chic theme, single '$' rounded statement is regarded as inline formula like `$f(x)=ax+b$`; double '$' rounded statement is regarded as block formula like `$$f(x)=ax+b$$`. More information please read LaTeX doc and [Formula test page in Demo Site](https://siricee.github.io/hexo-theme-Chic/2019/07/05/MathJax_test/).
 
-### Image-title
+## Plugins
 
-You have 2 methods to import images in your posts:
- 
- - image import with GFM (without image-title)
-   ```
-   ![pic](picUrl)
-   ```
- - hexo built-in image tag (with image-title)
-   ```
-   {% img [class names] /path/to/image [width] [height] '"alt text" "title text"' %}
-   ```
-So if you want to import as fast as possible, you can use GFM, and this way will also get the best adaptability. 
+- [hexo-generator-search](https://github.com/wzpan/hexo-generator-search) (for Local Search)
 
-**If you want to display image-title, you should use hexo built-in image tag.**
-- `"alt text"` is used when the image doesn't load or something went wrong in that image (404).
-- `"title text"` **will be displayed below the image.**
+  ```yml
+  $ npm install hexo-generator-searchdb --save
+  ```
 
-You can preview image-title and sample code in [Demo site](https://siricee.github.io/hexo-theme-Chic/2019/06/05/markdown_test/#Image)
+  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration file):
 
-## Customize
+  ```yml
+  # Hexo-generator-search
+  search:
+    path: search.xml
+    field: post
+    format: html
+  ```
 
-- Highlight Style: Enter `hexo-theme-Chic\themes\Chic\source\css\style.styl` change stylesheet with key word `_highlight` in link in `_highlight` dictionary.
+- [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) (for RSS)
 
-- Customize stylesheets in this [stylus](https://stylus-lang.com/) file:
+  ```yml
+  $ npm install hexo-generator-feed --save
+  ```
 
-   `hexo-theme-Chic\themes\Chic\source\css\custom.styl`
+  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration file):
 
-- Customize javascripts in the dictionary:
+  ```yml
+  feed:m
+      type: atom
+      path: atom.xml
+      limit: 20
+      hub:
+      content:
+      content_limit: 140
+      content_limit_delim: ' '
+      order_by: -date
+  ```
 
-  `hexo-theme-Chic\themes\Chic\source\js`
+- [hexo-generator-index-pin-top](https://github.com/netcan/hexo-generator-index-pin-top) (for Sticky Post)
 
-  Then add declaration in `_config.yml`using the keyword 'script'.
+  ```bash
+  $ npm uninstall hexo-generator-index --save
+  $ npm install hexo-generator-index-pin-top --save
+  ```
 
-## FAQ
+## Categories
 
-1. I deployed my site on a second-level url (such as username.github.io/blog), and my css, avatar and other sources are missing (404 error)
+```bash
+  hexo new page categories
+```
 
-    Answer: You need to change some URLs in root config keyword. For instance:
-    ```yaml
-    # (blog/_config.yml)
+Then paste following codes to file: /source/categories/index.md
 
-    # URL
-    ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-    url: https://siricee.github.io/hexo-theme-Chic/  # this is your deploy url.
-    root: /hexo-theme-Chic/  # this is your root folder url.
-    permalink: :year/:month/:day/:title/
-    permalink_defaults:
-    ```
+```md
+---
+title: categories
+type: categories
+layout: "categories"
+---
+```
 
-2. How to set the dark theme as default for whole site automatically?
-   
-   Answer: You need to change some code in `themes\Chic\source\js\script.js`, function `doucument.ready` as shown below.
-   ```javascript
-   document.ready(
-    function () {
-        // ...Omit part of the code
-        const isDark = currentTheme === 'dark';
-        // change this line to
-        // const isDark = currentTheme !== 'dark';
-   ```
-   Now, you have already set the dark theme as default successfully.
+## Tags
 
-3. More questions will be added...
+Same as categories.
+
+## Friend Links
+
+```bash
+hexo new page friends
+```
+
+Then paste following codes to file: /source/friends/index.md
+
+```md
+---
+title: friends
+type: friends
+layout: "friends"
+---
+```
+
+Then edit `friends_link` in `_config.yml`
 
 ## Gallery
-![screely-1560228577821.png](https://i.loli.net/2019/06/12/5d00a0850285252790.png)
-![screely-1560228791041.png](https://i.loli.net/2019/06/12/5d00a0856063661133.png)
-![screely-1560228621288.png](https://i.loli.net/2019/06/12/5d00a084e29cd40271.png)
-![screely-1560228761180.png](https://i.loli.net/2019/06/12/5d00a0855d28072392.png)
 
-![smartmockups_jwrd4ru3.png](https://i.loli.net/2019/06/12/5d00a085d115d16700.png)
+Need to write in the head of the markdown, this is not a good way to write, I hope to get a better way to write on github.
 
-![smartmockups_jwrd9y4r.png](https://i.loli.net/2019/06/12/5d00a085ec26284832.png)
+```md
+---
+title: Gallery
 
-## LICENSE
-Chic © [@Sirice](https://github.com/Siricee)
+albums: [["img_url", "img_caption"], ["img_url", "img_caption"]]
+---
+```
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+## Toc
+
+Use Tocbot to parse the title tags (h1~h6) in the content and insert the directory.
+
+- ayer/\_config.yml
+
+  ```bash
+  # Toc
+  toc: true
+  ```
+
+- If Toc is turned on in ayer/\_config.yml, then Tocbot will generate a Toc article directory in the title tag of each blog parsing content, but not all blogs require Toc, so in the Front-matter section of markdown Can be closed:
+
+  ```md
+  ---
+  no_toc: true
+  ---
+  ```
+
+---
+
+<br/>
+
+## Code Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/Shen-Yu/hexo-theme-ayer/graphs/contributors"><img src="https://opencollective.com/ayer/contributors.svg?width=890&button=false" /></a>
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/Shen-Yu/hexo-theme-ayer.svg)](https://starchart.cc/Shen-Yu/hexo-theme-ayer)
+
+## License
+
+<a src="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> by <a  href="https://github.com/Shen-Yu">Eric-Shen</a> is licensed under <a rel="license" href="https://github.com/Shen-Yu/hexo-theme-ayer/blob/master/LICENSE">SATA-License</a>.
+
+The basic idea is, whenever using a project using SATA license, people shall star/like/+1 that project and thank the author. Just imagine Google stared your project and send you a thank-you letter because they used your project in github!
+<br>
+
+本项目采用<a rel="license" href="https://github.com/Shen-Yu/hexo-theme-ayer/blob/master/LICENSE">SATA</a>开源协议，在遵守 MIT 许可证的前提下，你应该马不停蹄的给这个开源项目“点个赞”，比如 github 右上角的 star，然后你应该感谢这个开源项目的作者，作者信息可以在许可证头部的版权声明部分找到。<br>
+
+下面是几条 SATA 作者推荐的感谢途径，也是 SATA 包含的内容：
+
+- 给你使用的开源项目的作者发个 Email，和他交个朋友
+- 提出你在使用过程中发现的 BUG 或者提一些建设性的意见
+- 告诉你的朋友们这是一个多棒的开源项目
+- 当然，你也可以只是在心里默默的感激，不用让全世界都知道

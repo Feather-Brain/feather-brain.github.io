@@ -1,65 +1,57 @@
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<% if(config.author){ %>
-    <meta name="author" content="<%- config.author %>">
-<% } %>
-<% if(config.subtitle){ %>
-    <meta name="subtitle" content="<%- config.subtitle %>">
-<% } %>
-<% if(config.description){ %>
-    <meta name="description" content="<%- config.description %>">
-<% } %>
-<% if(config.keywords){ %>
-    <meta name="keywords" content="<%- config.keywords %>">
-<% } %>
-<%
-var title = page.title;
+<!DOCTYPE html>
 
-if (is_archive()){
-    title = __('archive_a');
+<% if (config.language){ %>
+<html lang="<%= config.language %>">
+  <% } else { %>
+  <html lang="en">
+    <% }%>
 
-    if (is_month()){
-        title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-        title += ': ' + page.year;
-    }
-} else if (is_category()){
-    title = __('category') + ': ' + page.category;
-} else if (is_tag()){
-    title = __('tag') + ': ' + page.tag;
-}
-%>
-<title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+    <head>
+      <meta charset="utf-8" />
+      <% var title = page.title; if (is_archive()) { title = __('archive_a'); if
+      (is_month()) { title += ': ' + page.year + '/' + page.month; } else if
+      (is_year()) { title += ': ' + page.year; } } else if (is_category()) {
+      title = page.category; } else if (is_tag()) { title = __('tag') + ': ' +
+      page.tag; } %> <% if (page.keywords){ %>
+      <meta
+        name="keywords"
+        content="<%= page.keywords %>,<%= config.keywords %>"
+      />
+      <% } else if (config.keywords){ %>
+      <meta name="keywords" content="<%= config.keywords %>" />
+      <% } %> <% if (page.description){ %>
+      <meta name="description" content="<%= page.description %>" />
+      <% } else if (config.description){ %>
+      <meta name="description" content="<%= config.description %>" />
+      <% } %>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title><% if (title){ %><%= title %> | <% } %> <%= config.title %></title>
+      <% if (theme.favicon){ %>
+      <link rel="shortcut icon" href="<%- theme.favicon %>" />
+      <% } %> <%- css('dist/main') %>
+      <%- css('css/fonts/remixicon') %>
+      <%- css('css/custom') %> <% if (theme.progressBar){ %>
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+      <% } %> <%- partial('google-analytics') %> <%- partial('baidu-analytics')
+      %>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
 
-<%# favicon %>
-<% if (theme.favicon){ %>
-    <link rel="icon" href="<%- url_for(theme.favicon) %>">
-<% } %>
-
-<%# css list %>
-<% if (theme.stylesheets !== undefined && theme.stylesheets.length > 0) { %>
-    <!-- stylesheets list from _config.yml -->
-    <% theme.stylesheets.forEach(url => { %>
-    <link rel="stylesheet" href="<%- url_for(url) %>">
-    <% }); %>
-<% } %>
-<%# javascript list %>
-<% if (theme.scripts !== undefined && theme.scripts.length > 0) { %>
-    <!-- scripts list from _config.yml -->
-    <% theme.scripts.forEach(url => { %>
-    <script src="<%- url_for(url) %>"></script>
-    <% }); %>
-<% } %>
-<%# mathjax support %>
-<% if(theme.mathjax.enable!==null&&theme.mathjax.enable===true){ %>
-    <%# import mathjax method: global or demand %>
-    <% if(theme.mathjax.import === 'global'){ %>
-        <%- partial('_plugins/mathjax.ejs') %>
-    <% } else if(theme.mathjax.import === 'demand'){ %>
-        <% if (page.mathjax){ %>
-            <%- partial('_plugins/mathjax.ejs') %>
-        <% } %>
-    <% } %>
-<% } %>
+      <!-- mermaid -->
+      <% if (theme.mermaid.enable) { %>
+      <script src="<%= theme.mermaid.cdn %>"></script>
+      <% } %>
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
