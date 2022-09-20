@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>tag | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                
+
+    <div class="container">
+        <div class="post-wrap tags">
+            <h2 class="post-title">-&nbsp;Tags&nbsp;-</h2>
+
+            <div class="tag-cloud-tags">
+                
+                    <a href="/tags/SpringMVC%E5%9F%BA%E7%A1%80/">SpringMVC基础<small>(1)</small></a>
+                
+                    <a href="/tags/SpringMVC%E9%85%8D%E7%BD%AE/">SpringMVC配置<small>(1)</small></a>
+                
+                    <a href="/tags/SpringMVC%E6%A1%88%E4%BE%8B/">SpringMVC案例<small>(1)</small></a>
+                
+                    <a href="/tags/%E6%8F%92%E4%BB%B6/">插件<small>(2)</small></a>
+                
+                    <a href="/tags/bloc%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E9%97%AE%E9%A2%98/">bloc图片上传问题<small>(2)</small></a>
+                
+                    <a href="/tags/post-asset-folde/">post_asset_folde<small>(1)</small></a>
+                
+                    <a href="/tags/linux/">linux<small>(2)</small></a>
+                
+                    <a href="/tags/%E7%AB%AF%E5%8F%A3/">端口<small>(1)</small></a>
+                
+                    <a href="/tags/kill/">kill<small>(1)</small></a>
+                
+                    <a href="/tags/picgo/">picgo<small>(1)</small></a>
+                
+                    <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/">腾讯云<small>(1)</small></a>
+                
+                    <a href="/tags/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/">Minecraft服务器搭建<small>(1)</small></a>
+                
+                    <a href="/tags/os%E5%BA%93/">os库<small>(1)</small></a>
+                
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">文件和目录操作<small>(1)</small></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

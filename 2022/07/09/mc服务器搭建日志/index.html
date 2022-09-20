@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>mc服务器搭建日志 | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开所有</a>
+        <a onclick="go_top()">返回顶部</a>
+        <a onclick="go_bottom()">直达底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? '展开所有' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">mc服务器搭建日志</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">featherain</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">七月 9, 2022&nbsp;&nbsp;18:06:21</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Minecraft/">Minecraft</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h1><p>搭建过程中用到putty进行服务器连接，使用宝塔面板进行服务器的文件上传、端口开放。</p>
+<h2 id="1、环境"><a href="#1、环境" class="headerlink" title="1、环境"></a>1、环境</h2><p>​    服务器环境是用到centos8，Ubuntu基本一个操作。    </p>
+<p>​    咱搭建的是java版的mc，所以要在服务器上安装java环境，具体的安装过程略。</p>
+<p>​    除此之外，因为服务器的客观原因，我们还需要在服务器上安装screen环境以保证我们服务的正常待机。</p>
+<p>​    centos：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install screen</span><br></pre></td></tr></table></figure>
+
+<p>​    ubuntu：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install screen</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p>​    首先我们准备一个空的文件夹来进行服务器的搭建，下面的操作都是在这个我们新建的空文件夹当中进行的。</p>
+<p>​    mojang提供了mc服务器的傻瓜式安装jar包，我们可以通过wget指令获取官网最新版的服务器jar包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar</span><br></pre></td></tr></table></figure>
+
+<p>​    也可以去官网手动下载<code>server.jar</code>，然后将jar包上传到我们创建的的目录里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.minecraft.net/zh-hans/download/server/</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<p>​    下载完成后，我们可以将jar包改名，标注一下版本（版本号去官网看）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv server.jar minecraft_server.1.19.jar</span><br></pre></td></tr></table></figure>
+
+<p>​    接下来进行初步安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx2G -Xms2G -jar minecraft_server.1.19.jar nogui</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-xmx用来指定我们运行初始堆内存大小，这里因为我服务器最大内存是4G所以设定xms是2G，堆内存调太大服务器会宕机所以不要…</p>
+<p>下面是官网的解释（<a target="_blank" rel="noopener" href="https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server%EF%BC%89">https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server）</a></p>
+<p><img src="image-20220709182444945.png" alt="image-20220709182444945" loading="lazy"></p>
+<p>英文原版：</p>
+<p><img src="image-20220709182830698.png" alt="image-20220709182830698" loading="lazy"></p>
+</blockquote>
+<p>​    执行完这个指令后，服务器还没有运行，输出响应错误，通知您需要同意EULA（最终用户许可协议）才能运行服务。</p>
+<p>​    这时候，我们的jar包已经半展开了，在当前目录下会出现一个eula.txt的文件，打开它，修改eula=false为eula=true，意为我们同意了上面的协议。</p>
+<p>​    然后再使用screen运行我们的mc服务，输入下面的指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S “MC1.19”</span><br></pre></td></tr></table></figure>
+
+<p>​    然后直接再次输入mc服务器启动命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx2G -Xms2G -jar minecraft_server.1.19.jar nogui</span><br></pre></td></tr></table></figure>
+
+<p>​    然后当你看到进程Done!的时候说明服务启动成功，之后只需要开放一下我们服务器的25565端口(mc默认监听端口)就可以在mc里面访问到我们的服务器了。</p>
+<p>​    然后按<code>ctrl+a+d</code>退出我们运行mc服务器的screen，之后后面想要返回这个screen的话，输入<code>screen -r</code>就可以查看当前运行的screen列表，然后选择后缀是MC1.19的那个，输入<code>screen -r 其全名</code>就可以进入了，这里是因为screen会给我们建立的线程加上一个数字前缀。</p>
+<h1 id="服务器更新日志"><a href="#服务器更新日志" class="headerlink" title="服务器更新日志"></a>服务器更新日志</h1><h2 id="2022-7-9-将服务器从1-18-2更新到1-19"><a href="#2022-7-9-将服务器从1-18-2更新到1-19" class="headerlink" title="2022.7.9 将服务器从1.18.2更新到1.19"></a>2022.7.9 将服务器从1.18.2更新到1.19</h2><p>​    更新服务器需要我们重新搭建一个1.19的服务器，然后把原来的地图和登录人物的信息上传就可以了。mc服务器的地图和人物信息都保存在我们服务器目录下的world目录里面，一般跨版本也要删区块，需要处理一下里面的地图文件。处理用到amulet（3d地图编辑器）和mca selector（区块编辑器）两个软件。这个服务是我们的好哥们eustrain友情提供的，让我们感谢他🎉🎉🎉🎉。</p>
+<h2 id="2022-7-31-up1-19-gt-1-19-1"><a href="#2022-7-31-up1-19-gt-1-19-1" class="headerlink" title="2022.7.31  up1.19-&gt;1.19.1"></a>2022.7.31  up1.19-&gt;1.19.1</h2><p>​    区块没修改，需要注意的是要去service.properties中修改difficulty=hard将模式修改成困难模式</p>
+
+        </div>
+
+        <!-- 底栏信息内容 -->
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>featherain</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>永久链接:</span>
+                        <span><a href="https://feather-brain.github.io/2022/07/09/mc%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97/">https://feather-brain.github.io/2022/07/09/mc%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97/</a></span>
+                    </p>
+                
+                
+                    <!-- <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p> -->
+                
+                
+                     <!-- <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p> -->
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/linux/"># linux</a>
+                    
+                        <a href="/tags/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/"># Minecraft服务器搭建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/09/19/Typora-picgo-%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%9B%BE%E7%89%87%E4%BA%91%E5%AD%98%E5%82%A8/">Typora-picgo-腾讯云-图片云存储</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/07/linux%E5%85%B3%E9%97%AD%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1/">linux关闭端口服务</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

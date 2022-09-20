@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>Typora-picgo-腾讯云-图片云存储 | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开所有</a>
+        <a onclick="go_top()">返回顶部</a>
+        <a onclick="go_bottom()">直达底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? '展开所有' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Typora-picgo-腾讯云-图片云存储</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">featherain</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 19, 2022&nbsp;&nbsp;23:48:55</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Typora%E4%BD%BF%E7%94%A8/">Typora使用</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Typora-picgo-腾讯云-图片云存储"><a href="#Typora-picgo-腾讯云-图片云存储" class="headerlink" title="Typora-picgo-腾讯云 图片云存储"></a>Typora-picgo-腾讯云 图片云存储</h1><p>​    为了避免写bloc的时候麻烦的图片上传，我们用picgo+腾讯云做一个自动图片上传</p>
+<h2 id="安装picgo"><a href="#安装picgo" class="headerlink" title="安装picgo"></a>安装picgo</h2><p>安装地址：<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">Releases · Molunerfinn/PicGo · GitHub</a></p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919112417777.png" alt="image-20220919112417777" loading="lazy"></p>
+<p>​    下载完成后，大概是这个样子</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919112607539.png" alt="image-20220919112607539" loading="lazy"></p>
+<p>​    我这里是已经配置完腾讯云的COS图床了，因为腾讯云有六个月的免费图床所以就先用这个测试一下，打开图床设置，点击腾讯云COS</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919115229723.png" alt="image-20220919115229723" loading="lazy"></p>
+<p>这几个必填项会在下面的图床搭建中得到对应内容，下面介绍腾讯云图床搭建的方式。</p>
+<h2 id="腾讯云图床搭建"><a href="#腾讯云图床搭建" class="headerlink" title="腾讯云图床搭建"></a>腾讯云图床搭建</h2><p>1、去腾讯云登录，实名，然后打开控制台，进入对象存储</p>
+<p>腾讯云控制台：<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/">总览 - 控制台 - 腾讯云 (tencent.com)</a></p>
+<p>点击左上角云产品-基础存储服务-对象存储</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919113141063.png" alt="image-20220919113141063" loading="lazy"></p>
+<p>然后点击创建存储桶</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919113323379.png" alt="image-20220919113323379" loading="lazy"></p>
+<p>因为我这边已经创建过存储桶了，所以在这里先使用别人的图片做示例，大概信息大差不差，访问权限选择公有读私有写，否则图片无法读取，地域建议离你所在的位置越近越好，多出来的选项默认就好。顺便说一下，这里的存储桶名称也就是picgo要填的<strong>bucket</strong>名称，格式是xxx-123213，v5的bucket名称是需要前面的名字加上后面的id的。</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919113412941.png" alt="image-20220919113412941" loading="lazy"></p>
+<blockquote>
+<p>图片源地址：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1834573">腾讯云COS对象存储+PicGo搭建图床教程 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</blockquote>
+<p>创建完成后，存储桶列表里面就可以看到我们创建的bucket存储桶了</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919113702280.png" alt="image-20220919113702280" loading="lazy"></p>
+<h4 id="bucket、存储区域、Appid"><a href="#bucket、存储区域、Appid" class="headerlink" title="bucket、存储区域、Appid"></a>bucket、存储区域、Appid</h4><p>点进去就可以看到我们存储桶的一个概要信息，有用的是这两个，一个是bucket名称（存储桶名称，包括id的全名），一个是存储区域（所属地域后面的ap-shanghai，不同的地域有不同的代码），appid就是存储桶名称后面的数字</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919113934034.png" alt="image-20220919113934034" loading="lazy"></p>
+<p>这样我们的图床就创建好了，接下来我们设置我们访问图床的账号</p>
+<p>点击右上角自己的图标，点击<strong>访问管理</strong></p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919114257050.png" alt="image-20220919114257050" loading="lazy"></p>
+<p>点击创建用户</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919114408730.png" alt="image-20220919114408730" loading="lazy"></p>
+<p>点击快速创建</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919114442853.png" alt="image-20220919114442853" loading="lazy"></p>
+<p>设置用户信息名称、访问方式修改为编程访问，重置密码取消勾选</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919114600756.png" alt="image-20220919114600756" loading="lazy"></p>
+<h4 id="SecretId、SecretKey"><a href="#SecretId、SecretKey" class="headerlink" title="SecretId、SecretKey"></a><strong>SecretId</strong>、<strong>SecretKey</strong></h4><p>然后点击创建用户，创建完成后，得到<strong>SecretId</strong>和<strong>SecretKey</strong></p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919114838350.png" alt="image-20220919114838350" loading="lazy"></p>
+<p>这样，我们的腾讯云COS图床就配置完成了，然后把五个必填的项写进去，然后点击设为默认图床，点击确定就基本可以了。</p>
+<h3 id="图床其他配置"><a href="#图床其他配置" class="headerlink" title="图床其他配置"></a>图床其他配置</h3><p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919115229723.png" alt="image-20220919115229723" loading="lazy"></p>
+<p>这个剩下的最后三个非必填存储路径是什么呢，首先那个存储路径是指我们在存储桶这边的一个文件列表中的保存文件路径，我这边写的是img/，对应在存储桶的文件列表中是这样的：</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919120209791.png" alt="image-20220919120209791" loading="lazy"></p>
+<p>这样我们的图片到时候就都会保存在img文件夹下面。剩下俩我没填，也应该不用填。</p>
+<p>然后还有就是腾讯云图床的一个访问控制哈，因为本身图床的访问和上传都有次数限制，那么如果我们不设权限控制的话，别人可以拿我们的图片url直接放到其他页面上，白嫖我们的图床使用次数，为了避免这种情况，我们可以在腾讯云这里设置一下防盗链。</p>
+<h4 id="防盗链设置"><a href="#防盗链设置" class="headerlink" title="防盗链设置"></a>防盗链设置</h4><p>防盗链是基于存储桶的，我们可以在控制台-对象存储-存储桶列表-详细信息-安全管理-防盗链设置里面进行设置</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919121110388.png" alt="image-20220919121110388" loading="lazy"></p>
+<p>点进去之后，可以开启防盗链，然后进行设计，一般是为我们的blog设置白名单，不过需要注意的是，我们如果不设置空referer允许的话，会出现编辑markdown的时候无法预览图片的问题，设置空referer的话就意味着我们允许不带referer的访问，这种情况就是我们直接在浏览器上输入我们图片的网络路径是可以访问到的，但是如果是在页面当中访问一般都是会带有referer也就是请求来源的信息的，所以我是放开了的，属于是一个君子锁。</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919121506927.png" alt="image-20220919121506927" loading="lazy"></p>
+<p>这样就可以正常使用了。</p>
+<h2 id="Typora选择使用picgo作为图片存储"><a href="#Typora选择使用picgo作为图片存储" class="headerlink" title="Typora选择使用picgo作为图片存储"></a>Typora选择使用picgo作为图片存储</h2><p>就是在Typora的偏好设置里面这样设置，然后可以点击验证图片上传选项，会给我们的图床上传一个typora图标图片，验证一下能不能用。</p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220919121727263.png" alt="image-20220919121727263" loading="lazy"></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>如果之前使用了插件hexo-asset-image进行本地图片上传，需要进行卸载，细节请转<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/81191bc2cb2d">记录hexo无法加载图片及修改yilia主题组件 - 简书 (jianshu.com)</a></p>
+
+        </div>
+
+        <!-- 底栏信息内容 -->
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>featherain</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>永久链接:</span>
+                        <span><a href="https://feather-brain.github.io/2022/09/19/Typora-picgo-%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%9B%BE%E7%89%87%E4%BA%91%E5%AD%98%E5%82%A8/">https://feather-brain.github.io/2022/09/19/Typora-picgo-%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%9B%BE%E7%89%87%E4%BA%91%E5%AD%98%E5%82%A8/</a></span>
+                    </p>
+                
+                
+                    <!-- <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p> -->
+                
+                
+                     <!-- <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p> -->
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%8F%92%E4%BB%B6/"># 插件</a>
+                    
+                        <a href="/tags/bloc%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E9%97%AE%E9%A2%98/"># bloc图片上传问题</a>
+                    
+                        <a href="/tags/picgo/"># picgo</a>
+                    
+                        <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/"># 腾讯云</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/09/20/hexo-github-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E3%80%81%E8%BF%81%E7%A7%BB/">hexo-github-博客搭建、迁移</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/09/mc%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97/">mc服务器搭建日志</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

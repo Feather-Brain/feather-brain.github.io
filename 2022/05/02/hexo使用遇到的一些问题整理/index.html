@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>hexo使用遇到的一些问题整理 | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开所有</a>
+        <a onclick="go_top()">返回顶部</a>
+        <a onclick="go_bottom()">直达底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? '展开所有' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">hexo使用遇到的一些问题整理</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">featherain</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">五月 2, 2022&nbsp;&nbsp;20:15:08</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/hexo/">hexo</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="hexo图片上传问题"><a href="#hexo图片上传问题" class="headerlink" title="hexo图片上传问题"></a>hexo图片上传问题</h1><h2 id="问题1：hexo自带配置无法满足GFM语法需要"><a href="#问题1：hexo自带配置无法满足GFM语法需要" class="headerlink" title="问题1：hexo自带配置无法满足GFM语法需要"></a>问题1：hexo自带配置无法满足GFM语法需要</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>hexo中执行hexo g后并不会自动根据我们.md文件中的图片路径自动生成相应文件夹存放这些图片，无论我们的路径是相对路径还是绝对路径都不会自动生成。这时候要去配置<code>_config.xml</code>中的<code>post_asset_folder</code>属性为<code>true</code>后，将我们写的.md文件中的图片都放到hexo new生成的bloc同名文件夹下。</p>
+<p>​    至此我们可以通过hexo内置标签系统的格式来让我们的图片在我们上传的bloc当中显示出来，但是这种内置标签系统一般仅用于图片标题，在更一般的场景下，也就是在使用GFM语法的情况下，却会出现问题：</p>
+<p>​    我们在source/_posts目录下面新建一个博客a.md，这时候因为我们配置了<code>post_asset_folder:true</code>，所以会出现一个与博客a同名的目录在source/_posts下，此时我们知道我们在博客a中引入的本地图片要放到source/_posts/博客a目录下，所以GFM语法在书写的时候就应该是这种形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](博客a/图片1.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>​    那么我们在执行hexo g生成博客的时候，这个GFM语法是不会被变动的，但是hexo并没有按照我们所想的，老老实实的把图片放到当前博客的index.html同级目录下的博客a目录当中，而是将生成的页面和图片都放到了博客a目录下，也就是说这时候页面的index.html和图片资源是在同一个目录下的。</p>
+<p>​    换句话说，hexo处理我们的_posts目录的时候，目录结构是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">博客a</span><br><span class="line">└── 图片1.jpg</span><br><span class="line">博客a.md</span><br></pre></td></tr></table></figure>
+
+<p>​    处理之后生成的页面目录是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">博客a</span><br><span class="line">├── 图片1.jpg</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+
+<p>​    这就导致我们的实际博客当中的GFM语法无法正常显示图片。</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>​    最快的解决办法就是在我们写完每个.md之后，直接修改所有图片GFM中的路径，去掉前面的路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](博客a/图片1.jpg)  --&gt;  ![](图片1.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>​    或者在写的时候就直接自己新创建一个博客a的目录，然后图片也放到这个目录里面，写的时候GFM图片路径就直接放到当前目录下，然后再把图片和.md分别放到对应的位置，这样就不用修改GFM内容了。</p>
+<p>​    当然，我们的hexo已经有了相应的插件能够帮我们处理这个东西，也就是hexo-asset-image插件，我们可以在hexo根目录执行<code>npm install hexo-asset-image --save</code>命令来添加这个插件。这个插件大概有两个功能，一是能够将我们生成的页面目录变成如下形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">博客a</span><br><span class="line">├── 博客a</span><br><span class="line">|	└──图片1.jpg</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+
+<p>二可能是修改网络图片的路径和windows风格的路径，这个就不太清楚了，主要是第一个功能能够解决上面的问题</p>
+
+        </div>
+
+        <!-- 底栏信息内容 -->
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>featherain</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>永久链接:</span>
+                        <span><a href="https://feather-brain.github.io/2022/05/02/hexo%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/">https://feather-brain.github.io/2022/05/02/hexo%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/</a></span>
+                    </p>
+                
+                
+                    <!-- <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p> -->
+                
+                
+                     <!-- <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p> -->
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%8F%92%E4%BB%B6/"># 插件</a>
+                    
+                        <a href="/tags/bloc%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E9%97%AE%E9%A2%98/"># bloc图片上传问题</a>
+                    
+                        <a href="/tags/post-asset-folde/"># post_asset_folde</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/05/10/SpringMVC-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/">SpringMVC - 基本配置及使用案例</a>
+            
+            
+            <a class="next" rel="next" href="/2022/05/02/python%E5%9F%BA%E7%A1%80-os%E5%BA%93-%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">python基础 - os库 - 文件和目录操作</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>python基础 - os库 - 文件和目录操作 | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开所有</a>
+        <a onclick="go_top()">返回顶部</a>
+        <a onclick="go_bottom()">直达底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? '展开所有' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">python基础 - os库 - 文件和目录操作</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">featherain</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">五月 2, 2022&nbsp;&nbsp;13:44:44</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/python%E5%9F%BA%E7%A1%80/">python基础</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h1><h2 id="1）获取目录信息"><a href="#1）获取目录信息" class="headerlink" title="1）获取目录信息"></a>1）获取目录信息</h2><h3 id="当前文件所处目录的绝对路径"><a href="#当前文件所处目录的绝对路径" class="headerlink" title="当前文件所处目录的绝对路径"></a>当前文件所处目录的绝对路径</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.path.abspath(<span class="string">&quot;.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="image-20220502194743691.png" alt="image-20220502194743691" loading="lazy"></p>
+<h3 id="当前文件所处目录的上一级目录的绝对路径"><a href="#当前文件所处目录的上一级目录的绝对路径" class="headerlink" title="当前文件所处目录的上一级目录的绝对路径"></a>当前文件所处目录的上一级目录的绝对路径</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.path.abspath(<span class="string">&quot;..&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="image-20220503181249896.png" alt="image-20220503181249896" loading="lazy"></p>
+<h3 id="将当前目录下所有内容放到列表中返回"><a href="#将当前目录下所有内容放到列表中返回" class="headerlink" title="将当前目录下所有内容放到列表中返回"></a>将当前目录下所有内容放到列表中返回</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="built_in">print</span>(os.listdir())</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="image-20220503181602579.png" alt="image-20220503181602579" loading="lazy"></p>
+<h3 id="将指定目录下的所有内容放到列表中返回"><a href="#将指定目录下的所有内容放到列表中返回" class="headerlink" title="将指定目录下的所有内容放到列表中返回"></a>将指定目录下的所有内容放到列表中返回</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.listdir(<span class="string">&#x27;d:\\&#x27;</span>) </span><br></pre></td></tr></table></figure>
+
+<p>输出略</p>
+<h3 id="将指定目录下的指定后缀内容放到列表中返回"><a href="#将指定目录下的指定后缀内容放到列表中返回" class="headerlink" title="将指定目录下的指定后缀内容放到列表中返回"></a>将指定目录下的指定后缀内容放到列表中返回</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">y=[f <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(<span class="string">&#x27;C:\pythonFiles\pythonProject\expr9&#x27;</span>)  <span class="keyword">if</span> f.endswith((<span class="string">&#x27;.py&#x27;</span>,<span class="string">&#x27;.txt&#x27;</span>))]</span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="image-20220503185539629.png" alt="image-20220503185539629" loading="lazy"></p>
+<h2 id="2）创建目录"><a href="#2）创建目录" class="headerlink" title="2）创建目录"></a>2）创建目录</h2><h3 id="在绝对路径下创建一个目录"><a href="#在绝对路径下创建一个目录" class="headerlink" title="在绝对路径下创建一个目录"></a>在绝对路径下创建一个目录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.mkdir(<span class="string">&#x27;C:\pythonFiles\pythonProject\expr0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    这种方式创建目录时，可以创建多级目录，即如果pythonProject这个目录没有的话，也会创建出来，然后再在其中创建expr0目录。</p>
+<h2 id="3）判断目录-文件是否存在"><a href="#3）判断目录-文件是否存在" class="headerlink" title="3）判断目录/文件是否存在"></a>3）判断目录/文件是否存在</h2><p><code>os.path.isdir(&#39;&#39;)</code>： 判断指定位置的<strong>目录是否存在</strong>，存在返回true。单引号中可以是绝对路径或相对路径。</p>
+<p><code>os.path.isfile(&#39;&#39;)</code>：判断指定位置的<strong>文件是否存在</strong>，存在则返回true。单引号中可以是绝对路径或相对路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="built_in">print</span>(os.path.isdir(<span class="string">&#x27;C:\pythonFiles\pythonProject\expr0&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(os.path.isdir(<span class="string">&#x27;C:\pythonFiles\pythonProject\expr1&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(os.path.isfile(<span class="string">r&#x27;C:\pythonFiles\pythonProject\expr9\expr0.py&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(os.path.isfile(<span class="string">r&#x27;C:\pythonFiles\pythonProject\expr9\expr1.py&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> python中字符串前面加上字符r代表当前字符串不进行转义</p>
+</blockquote>
+<p>输出结果：<img src="image-20220504104612288.png" alt="image-20220504104612288" loading="lazy"></p>
+<h3 id="4）shutil库-复制、移动目录-文件"><a href="#4）shutil库-复制、移动目录-文件" class="headerlink" title="4）shutil库 - 复制、移动目录/文件"></a>4）shutil库 - 复制、移动目录/文件</h3><p>1、<code>os.chdir(&#39;&#39;)</code>：指定某一目录为当前工作目录，若无该语句，工作目录默认为当前程序所在目录。</p>
+<p>2、<code>shutil.copyfile(&#39;&#39;,&#39;&#39;)</code>：拷贝当前工作目录下的某一文件内容到指定目录下的指定文件中，拷贝时两个文件的后缀可以不同，<strong>若指定位置没有指定目录和文件，则会直接创建</strong>。第一个参数为当前工作目录下的拷贝源文件，例如<code>test.txt</code>；第二个参数为指定要拷贝到的文件路径及文件名，例如<code>C:\pythonFiles\pythonProject\expr0\test_copy.txt</code>，当然也可以是相对路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="comment"># 当前工作目录：C:\pythonFiles\pythonProject\expr9</span></span><br><span class="line"><span class="built_in">print</span>(os.listdir())</span><br><span class="line">os.chdir(<span class="string">r&quot;C:\pythonFiles\pythonProject\expr9&quot;</span>)    <span class="comment"># 指定工作目录：将C:\pythonFiles\pythonProject\expr9设为当前工作目录</span></span><br><span class="line"><span class="built_in">print</span>(os.listdir())</span><br><span class="line">shutil.copyfile(<span class="string">&quot;test.txt&quot;</span>,<span class="string">r&quot;C:\pythonFiles\pythonProject\expr0\test_copy.py&quot;</span>)    <span class="comment"># 拷贝当前工作目录下的test.txt至C:\pythonFiles\pythonProject\expr0\test_copy.py</span></span><br><span class="line">shutil.copyfile(<span class="string">&quot;test.txt&quot;</span>,<span class="string">r&quot;C:\pythonFiles\pythonProject\expr0\test_copy.txt&quot;</span>)    <span class="comment"># 拷贝当前工作目录下的test.txt至C:\pythonFiles\pythonProject\expr0\test_copy.txt</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>python中单引号和双引号都用来表示字符串</p>
+<p>python中字符串前面加上字符r代表当前字符串不进行转义</p>
+</blockquote>
+<p>输出结果：</p>
+<p><img src="image-20220504111003170.png" alt="image-20220504111003170" loading="lazy"></p>
+<p><img src="image-20220504111116157.png" alt="image-20220504111116157" loading="lazy"></p>
+<p>3、<code>shutil.move(&#39;&#39;,&#39;&#39;)</code>：将当前工作目录下的指定文件移动到某一目录或文件上，若为文件，则会覆盖掉原文件内容。第一个参数为当前工作目录下的拷贝源文件，例如<code>test.txt</code>；第二个参数为指定要拷贝到的目录路径或文件路径，例如<code>C:\pythonFiles\pythonProject\expr0</code>。</p>
+<p>4、<code>os.remove(&#39;&#39;)</code>：删除指定文件。</p>
+<p>5、<code>shutil.copytree(&#39;&#39;,&#39;&#39;)</code>：将指定路径下的目录、文件，复制到新目录中，需要注意的是，<strong>我们想要复制到的新目录必须是一个未存在的目录</strong>。参数前者是指定的想要复制的目录路径，后者是我们要复制到的新目录路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">shutil.copytree(<span class="string">r&#x27;C:\pythonFiles\pythonProject\expr9&#x27;</span>,<span class="string">r&#x27;C:\pythonFiles\pythonProject\expr1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="image-20220504113102140.png" alt="image-20220504113102140" loading="lazy"></p>
+
+        </div>
+
+        <!-- 底栏信息内容 -->
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>featherain</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>永久链接:</span>
+                        <span><a href="https://feather-brain.github.io/2022/05/02/python%E5%9F%BA%E7%A1%80-os%E5%BA%93-%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">https://feather-brain.github.io/2022/05/02/python%E5%9F%BA%E7%A1%80-os%E5%BA%93-%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/</a></span>
+                    </p>
+                
+                
+                    <!-- <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p> -->
+                
+                
+                     <!-- <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p> -->
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/os%E5%BA%93/"># os库</a>
+                    
+                        <a href="/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/"># 文件和目录操作</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/05/02/hexo%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/">hexo使用遇到的一些问题整理</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
