@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="featherain">
+
+
+    <meta name="subtitle" content="Welcome">
+
+
+
+
+<title>Spring线程池 | featherain的个人站</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">featherain&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">featherain&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">全部</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开所有</a>
+        <a onclick="go_top()">返回顶部</a>
+        <a onclick="go_bottom()">直达底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? '展开所有' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Spring线程池</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">featherain</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 20, 2022&nbsp;&nbsp;14:14:22</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/java/">java</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="🚧🚧快速线程池搭建使用-🏭建设中"><a href="#🚧🚧快速线程池搭建使用-🏭建设中" class="headerlink" title="🚧🚧快速线程池搭建使用(🏭建设中)"></a>🚧🚧快速线程池搭建使用(🏭建设中)</h1><h2 id="Spring封装的JDK线程池"><a href="#Spring封装的JDK线程池" class="headerlink" title="Spring封装的JDK线程池"></a>Spring封装的JDK线程池</h2><p>​    spring的ioc中是封装了一个默认的线程池的，并提供给我们自定义线程池并交给ioc容器管理使用的方法，通过@EnableAsync就可以使用多线程，使用@Async就可以定义一个线程任务，通过spring给我们提供的ThreadPoolTaskExecutor就可以使用线程池。</p>
+<p>1、自定义线程池信息</p>
+<p>​    创建线程池配置类<code>ThreadPoolConfig</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableAsync;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executor;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadPoolConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean(&quot;taskExecutor&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Executor <span class="title function_">taskExecutor</span><span class="params">()</span>  &#123;</span><br><span class="line">        <span class="comment">//ThreadPoolTaskExecutor是Executor的曾曾孙子</span></span><br><span class="line">        <span class="type">ThreadPoolTaskExecutor</span> <span class="variable">executor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolTaskExecutor</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> Runtime.getRuntime().availableProcessors();<span class="comment">//获取到服务器的cpu内核</span></span><br><span class="line">        <span class="comment">// 设置线程池维护的基本线程数</span></span><br><span class="line">        executor.setCorePoolSize(i);</span><br><span class="line">        <span class="comment">// 设置最大线程数</span></span><br><span class="line">        executor.setMaxPoolSize(i*<span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 设置队列容量</span></span><br><span class="line">        executor.setQueueCapacity(i*<span class="number">4</span>);</span><br><span class="line">        <span class="comment">// 设置线程空闲时间（秒）</span></span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">60</span>);</span><br><span class="line">        <span class="comment">// 设置默认线程名称</span></span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">&quot;taskExecutor-&quot;</span>);</span><br><span class="line">        <span class="comment">// 设置拒绝策略</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.CallerRunsPolicy());</span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里这个拒绝策略CallerRunsPolicy有OOM风险，不是很建议使用。</p>
+<p>​    这里的<code>ThreadPoolTaskExecutor</code>是Spring提供的线程池，当然我们可以通过xml、yml、properties的方式来配置，也可以通过这种配置类的方式进行线程池配置，我们来说明一下线程池配置类当中字段的含义。</p>
+<p>​    **<code>@Configuration</code>**：标识配置类，并将配置类注册到spring的IOC容器当中。（如果使用xml可以用<code>@ImportResource</code>把xml注入进来）</p>
+<p>​    **<code>@EnableAsync</code>**：开启异步支持，在<code>@SpringBootApplication</code>启动类或者<code>@Configuration</code>注解类上添加，使得@Async对标注的方法开启异步多线程调用，spring对他的注解如下：</p>
+<blockquote>
+<p>Enables Spring’s asynchronous method execution capability, similar to functionality found in Spring’s <a href="task:*">task:*</a> XML namespace.</p>
+<p>To be used together with @Configuration classes as follows, enabling annotation-driven async processing for an entire Spring application context:</p>
+<p>  @Configuration<br>  @EnableAsync<br>  public class AppConfig {</p>
+<p>  }</p>
+</blockquote>
+<blockquote>
+<p>启用 Spring 的异步方法执行功能，类似于 Spring 的 <a href="task:">task:</a> XML 命名空间中的功能。</p>
+<p>要与@Configuration 类一起使用，如下所示，为整个 Spring 应用程序上下文启用注释驱动的异步处理：</p>
+<p>  @Configuration<br>  @EnableAsync<br>  public class AppConfig {</p>
+<p>  }</p>
+</blockquote>
+<p>​    **<code>@Bean(&quot;taskExecutor&quot;)</code>**：当我们在使用@Async标注的方法的时候，如果不指定使用的线程池，默认优先使用上下文当中唯一定义的TaskExecutor类型的bean线程池，其次使用名为”taskExecutor”的Executor类型的bean线程池，俩都没有就用SimpleAsyncTaskExecutor去处理异步方法调用。这个名称可以自定义，只不过taskExecutor是比较特殊的一个而已，如果我们用taskExecutor标注了我们的自定义线程池就不需要再在@Async后面指定bean名称了，不过一般也会加上。</p>
+<blockquote>
+<p>By default, Spring will be searching for an associated thread pool definition: either a unique org.springframework.core.task.TaskExecutor bean in the context, or an java.util.concurrent.Executor bean named “taskExecutor” otherwise. If neither of the two is resolvable, a org.springframework.core.task.SimpleAsyncTaskExecutor will be used to process async method invocations. Besides, annotated methods having a void return type cannot transmit any exception back to the caller. By default, such uncaught exceptions are only logged.</p>
+</blockquote>
+<blockquote>
+<p>默认情况下，Spring 将搜索关联的线程池定义：要么是上下文中唯一的 org.springframework.core.task.TaskExecutor bean，要么是名为“taskExecutor”的 java.util.concurrent.Executor bean。如果两者都无法解析，则将使用 org.springframework.core.task.SimpleAsyncTaskExecutor 来处理异步方法调用。此外，具有 void 返回类型的带注释的方法不能将任何异常传输回调用者。默认情况下，仅记录此类未捕获的异常。</p>
+</blockquote>
+<h4 id="配置项："><a href="#配置项：" class="headerlink" title="配置项："></a><strong>配置项</strong>：</h4><h5 id="CorePoolSize：核心线程数"><a href="#CorePoolSize：核心线程数" class="headerlink" title="CorePoolSize：核心线程数"></a><strong>CorePoolSize：核心线程数</strong></h5><p>  线程池保持活跃的最小线程数(没有任务需要执行时的线程池大小)，因为线程池里面的线程并不是线程池注入之后就开启，而是需要有任务提交之后才会创建，开始的时候是空的。所以当我们刚启动spring主类服务，线程池注入之后，当我们有任务提交到这个线程池之后才会创建一个线程放入到线程池里面，在线程活跃时间里线程池会一直维护CorePoolSize个线程，如果设置allowCoreThreadTimeout=true（默认false）时，核心线程会超时关闭，否则一直存活。</p>
+<blockquote>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220920175553025.png" alt="image-20220920175553025" loading="lazy"></p>
+<p>核心线程数的默认值为1</p>
+</blockquote>
+<h5 id="MaxPoolSize：线程池允许的最大线程数"><a href="#MaxPoolSize：线程池允许的最大线程数" class="headerlink" title="MaxPoolSize：线程池允许的最大线程数"></a><strong>MaxPoolSize：线程池允许的最大线程数</strong></h5><p>​    线程池中的当前线程数目不会超过这个数值。如果已有线程的任务已满，并且当前线程个数小于maximumPoolSize，那么会创建新的线程来执行任务。</p>
+<blockquote>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220920175750993.png" alt="image-20220920175750993" loading="lazy"></p>
+<p>默认设置为Integer上限，也就是默认无上限</p>
+</blockquote>
+<h5 id="queueCapacity：任务队列容量（阻塞队列）"><a href="#queueCapacity：任务队列容量（阻塞队列）" class="headerlink" title="queueCapacity：任务队列容量（阻塞队列）"></a><strong>queueCapacity：任务队列容量（阻塞队列）</strong></h5><p>​    当线程池里面的线程数量大于MaxPoolSize的时候，将新任务放入queueCapacity大小的阻塞任务队列当中等待空闲线程。</p>
+<blockquote>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220920180126596.png" alt="image-20220920180126596" loading="lazy"></p>
+<p>正值会拿LinkedBlockingQueue存，0或者负值会得到SynchronousQueue</p>
+</blockquote>
+<h5 id="KeepAliveSeconds：线程空闲时间"><a href="#KeepAliveSeconds：线程空闲时间" class="headerlink" title="KeepAliveSeconds：线程空闲时间"></a><strong>KeepAliveSeconds：线程空闲时间</strong></h5><p>​    如果线程在KeepAliveSeconds时间后没有新的任务进入，则关闭线程，若设置allowCoreThreadTimeout=true则核心线程也受此影响。</p>
+<blockquote>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220920175649752.png" alt="image-20220920175649752" loading="lazy"></p>
+<p>线程空闲时间默认60s</p>
+</blockquote>
+<h5 id="RejectedExecutionHandler：任务拒绝处理器"><a href="#RejectedExecutionHandler：任务拒绝处理器" class="headerlink" title="RejectedExecutionHandler：任务拒绝处理器"></a><strong>RejectedExecutionHandler</strong>：任务拒绝处理器</h5><p>​    当线程池的线程和任务已满且任务队列也满了之后，若是还有新的任务请求，则交由任务拒绝处理器处理，其中包含四种拒绝策略:</p>
+<ul>
+<li><p><strong>AbortPolicy</strong>：丢弃任务，直接抛出RejectedExecutionException异常。(默认)</p>
+</li>
+<li><p><strong>CallerRunsPolicy</strong>：在任务被拒绝添加后，会调用当前线程池的所在的线程去执行被拒绝的任务，会阻塞主线程。</p>
+</li>
+<li><p><strong>DiscardPolicy</strong>：直接抛弃，什么都不发生。</p>
+</li>
+<li><p><strong>DiscardOldestPolicy</strong>：抛弃任务队列中最旧的任务也就是最先加入队列的，再把这个新任务添加进去。</p>
+</li>
+</ul>
+<blockquote>
+<p>也可以自定义拒绝策略，下面的方法源自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9fec2424de54">java多线程-ThreadPoolExecutor的拒绝策略 - 简书 (jianshu.com)</a></p>
+<p><img src="https://featherain-1302420321.cos.ap-shanghai.myqcloud.com/img/image-20220920181436387.png" alt="image-20220920181436387" loading="lazy"></p>
+</blockquote>
+<blockquote>
+<p>👇上面是我的理解，下面是我觉得说的很明白的一位博主写的👇</p>
+<p>1、corePoolSize：核心线程数</p>
+<ul>
+<li>   核心线程会一直存活，即使没有任务需要执行</li>
+<li>   当线程数小于核心线程数时，即使有线程空闲，线程池也会优先创建新线程处理任务</li>
+<li>   设置allowCoreThreadTimeout=true（默认false）时，核心线程会超时关闭</li>
+</ul>
+<p>2、queueCapacity：任务队列容量（阻塞队列）</p>
+<ul>
+<li>当核心线程数达到最大时，新任务会放在队列中排队等待执行</li>
+</ul>
+<p>3、maxPoolSize：最大线程数</p>
+<ul>
+<li>当线程数&gt;=corePoolSize，且任务队列已满时。线程池会创建新线程来处理任务</li>
+<li>当线程数=maxPoolSize，且任务队列已满时，线程池会拒绝处理任务而抛出异常</li>
+</ul>
+<p>4、 keepAliveTime：线程空闲时间</p>
+<ul>
+<li>当线程空闲时间达到keepAliveTime时，线程会退出，直到线程数量=corePoolSize</li>
+<li>如果allowCoreThreadTimeout=true，则会直到线程数量=0</li>
+</ul>
+<p>5、allowCoreThreadTimeout：允许核心线程超时关闭<br>6、rejectedExecutionHandler：任务拒绝处理器</p>
+<ul>
+<li>两种情况会拒绝处理任务：</li>
+<li>当线程数已经达到maxPoolSize，切队列已满，会拒绝新任务</li>
+<li>当线程池被调用shutdown()后，会等待线程池里的任务执行完毕，再shutdown。如果在调用shutdown()和线程池真正shutdown之间提交任务，会拒绝新任务</li>
+</ul>
+<ul>
+<li><p>线程池会调用rejectedExecutionHandler来处理这个任务。如果没有设置默认是AbortPolicy，会抛出异常</p>
+</li>
+<li><p>ThreadPoolExecutor类有几个内部实现类来处理这类情况：</p>
+</li>
+<li><p>AbortPolicy 丢弃任务，抛运行时异常</p>
+</li>
+<li><p>CallerRunsPolicy 执行任务</p>
+</li>
+<li><p>DiscardPolicy 忽视，什么都不会发生</p>
+</li>
+<li><p>DiscardOldestPolicy 从队列中踢出最先进入队列（最后一个执行）的任务</p>
+</li>
+<li><p>实现RejectedExecutionHandler接口，可自定义处理器</p>
+</li>
+</ul>
+<p>来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankyou/p/10135212.html">理解ThreadPoolExecutor线程池的corePoolSize、maximumPoolSize和poolSize - FrankYou - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<h5 id="线程数量"><a href="#线程数量" class="headerlink" title="线程数量"></a>线程数量</h5><p>​    线程的切换由CPU进行，如果待机线程比较多，CPU就要进行更多的线程切换，会影响执行效率，对于不同的任务，线程数的设置也不尽相同，需要根据CPU核心数N对最大线程数进行选择：</p>
+<blockquote>
+<p>获取CPU核心数N的方法</p>
+<p>int N= Runtime.getRuntime().availableProcessors();</p>
+</blockquote>
+<p><strong>CPU密集型：</strong></p>
+<p>​    指含有非常复杂的调用，循环次数很多，或者递归调用层次很深或者其他复杂情况需要大量计算的任务。</p>
+<p>​    此时最大线程数一般可以设置为N+1个。</p>
+<p><strong>IO密集型：</strong></p>
+<p>​    指需要频繁读取磁盘上的数据，或者需要通过网络远程调用接口等IO操作较多的任务场景。</p>
+<p>​    此时最大线程数一般可以设置为2N个。</p>
+<blockquote>
+<p>数据来源:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/270657575">线程池最佳线程数量到底要如何配置？ - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>2、使用<code>CompletableFuture</code>执行线程池异步操作</p>
+<p>这里方便测试直接在controller里写了，好孩子不要学</p>
+<p>文件下载的业务代码封装到Files.downloads里面了，用的是poi写的xlsx文档。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(value = &quot;/conditionsDownloadPlus&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">downloadFilePlus</span><span class="params">(HttpServletResponse response,<span class="meta">@RequestBody</span> EtpsQueryListForm etpsQueryListForm)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">    CompletableFuture&lt;Void&gt; future = CompletableFuture.runAsync(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Files.downloads(response,<span class="string">&quot;企业详情文件&quot;</span>,etpsService.searchFile(etpsQueryListForm.toParam(EtpsQueryListParam.class)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;Indexquery error: files download error:&quot;</span>+e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,threadPoolTaskExecutor);</span><br><span class="line">    CompletableFuture.anyOf(future).get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CompletableFuture</code>：</p>
+<p>​    使用.get()会将主线程阻塞，等待线程结束返回结果，我们在这里使用线程池的目的是为了在业务环境中防止太多ip同时访问文件下载的高能耗接口导致OOM，使用线程池对这些需要占用大量内存空间进行文件操作的流程进行数量限制，规定最大同时运行数，能够避免OOM的情况出现。</p>
+<h2 id="方法2：使用Springboot的-Async标识异步执行方法"><a href="#方法2：使用Springboot的-Async标识异步执行方法" class="headerlink" title="方法2：使用Springboot的@Async标识异步执行方法"></a>方法2：使用Springboot的@Async标识异步执行方法</h2><p>​    这个方法也是首先写一下线程池bean，与上面一样，然后在service层写impl方法的时候加上<code>@Async(&quot;threadPoolTaskExecutor&quot;)</code>就可以了，然后注入service使用这个方法，springboot会帮我们异步执行该方法。</p>
+<p>service:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IFileService</span> &#123;</span><br><span class="line">    Future <span class="title function_">installFiles</span><span class="params">(HttpServletResponse response, String fileName, List&lt;Etps&gt; list)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ServiceImpl：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.Async;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">IFileService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Async(&quot;threadPoolTaskExecutor&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Future <span class="title function_">installFiles</span><span class="params">(HttpServletResponse response, String fileName, List&lt;Etps&gt; list)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Files.downloads(response,fileName,list);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AsyncResult</span>(<span class="literal">true</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AsyncResult</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    IFileService fileService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@PostMapping(value = &quot;/downloadFilePlus&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">downloadFilePlus</span><span class="params">(HttpServletResponse response,<span class="meta">@RequestBody</span> EtpsQueryListForm etpsQueryListForm)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">        <span class="type">Future</span> <span class="variable">future</span> <span class="operator">=</span> fileService.installFiles(response, <span class="string">&quot;企业详情文件&quot;</span>, etpsService.searchFile(etpsQueryListForm.toParam(EtpsQueryListParam.class)));</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="comment">//while轮询等待，轮询间隔1s</span></span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">if</span>(future.isDone())&#123;         </span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Future</code>：</p>
+<p><code>@Async</code>：</p>
+<p>​    这种方式可以直接用在文件上传这种不需要response的业务场景上，因为在我们调用了这个异步方法之后就可以直接关闭连接了，但是像我们这种需要使用response进行文件写入的场景，就需要我们的主线程在async方法完成之前维持连接，保持我们的response的开启状态，但现在我在网上找到的等待方法就纯纯while轮询等待线程isDone()，如果不是那种需要异步操作列表的场景使用这玩意感觉挺笨的，不如用方法一。</p>
+<h2 id="两种方法区别和联系"><a href="#两种方法区别和联系" class="headerlink" title="两种方法区别和联系"></a>两种方法区别和联系</h2><h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>​    消息队列是需要一个持续运行的线程维护这个队列，实际上是一个生产者消费者模型，在该场景下的生产者是我们的file下载类线程，消费者可以看作是我们这个接口的主线程，所以在这二者之间想要实现一个消息队列，就需要有一个能够一直运行的线程，每当有接口请求下载文件的时候，我们的controller去访问这个一直运行着的线程，去消息队列中发送一个请求，这样看来对于消息队列来说生产者应该是我们的接口主线程，消费者是我们的file下载线程，这里还需要有一个notify机制，消息队列需要去唤醒一个或多个线程去消费消息队列中的任务，后面这个消费者可以实现一个线程池但线程池本身就有核心线程-等待队列-线程的一个机制，在这个简单场景下消息队列没啥意义，或者说线程池本身就实现了消息队列。</p>
+<p>​    现在的框架里面已经实现了一个rabbitMQ，在</p>
+
+        </div>
+
+        <!-- 底栏信息内容 -->
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>featherain</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>永久链接:</span>
+                        <span><a href="https://feather-brain.github.io/2022/09/20/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0/">https://feather-brain.github.io/2022/09/20/spring%E7%BA%BF%E7%A8%8B%E6%B1%A0/</a></span>
+                    </p>
+                
+                
+                    <!-- <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p> -->
+                
+                
+                     <!-- <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p> -->
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"># 线程池</a>
+                    
+                        <a href="/tags/spring/"># spring</a>
+                    
+                        <a href="/tags/springboot/"># springboot</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/09/20/jenkins%E6%8C%81%E7%BB%AD%E6%9E%84%E5%BB%BA/">jenkins持续构建</a>
+            
+            
+            <a class="next" rel="next" href="/2022/09/20/nacos%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/">nacos配置中心</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© featherain | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
